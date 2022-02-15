@@ -13,10 +13,10 @@ const getTitle = (urls) => {
       else url = "https://www.".concat(url);
 
       try {
-        let fetchRes = await fetch(url);
-        let body = await fetchRes.text();
-        const title = parseTitle(body);
-        titles.push(title);
+        fetch(url)
+          .then((res) => res.text())
+          .then((body) => parseTitle(body))
+          .then((title) => titles.push(title));
       } catch (err) {
         titles.push("NO RESPONSE");
       }
